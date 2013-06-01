@@ -13,6 +13,7 @@ var links = document.getElementsByTagName('a');
 for (var i = 0; i < links.length; i++) {
 	var link = links[i].href.match(/javascript:newwindow\('(.*)'\)/);
 	if(link){
+		if(links[i].textContent === "flash版") continue;
 		replace_link(links[i], RegExp.$1);
 	}
 }
