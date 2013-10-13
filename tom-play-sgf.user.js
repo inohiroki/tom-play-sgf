@@ -2,7 +2,7 @@
 // @name           tom-play-sgf
 // @namespace      tom
 // @description    棋聖道場のsgfを再生出来るようにする
-// @version        0.0.2
+// @version        0.0.3
 // @updateURL      https://github.com/inohiroki/tom-play-sgf/raw/master/tom-play-sgf.user.js
 // @include        http://weiqi.sports.tom.com/*
 // @include        http://weiqi.tom.com/*
@@ -38,14 +38,18 @@ function replace_link(element, link)
 //
 function replace_link2(element, link)
 {
+    var url = location.href;
+    var re = /^(.*\/).*$/;  
+    var currentDir = url.replace(re,"$1");
+
 	var s = link.split("/");
 	var f;
 	if(s.length == 1){ // 古い問題
 		f = s[0].split(".");
-		element.href = "http://ino.xrea.jp/sgf/tom/TomTsumegoService.php?url=http://weiqi.tom.com/hubo/game/" + f[0] + "sgf.htm";
+		element.href = "http://ino.xrea.jp/sgf/tom/TomTsumegoService.php?url=" + currentDir +"game/" + f[0] + "sgf.htm";
 	}else if(s.length == 2){ // 最近の問題
 		f = s[1].split(".");
-		element.href = "http://ino.xrea.jp/sgf/tom/TomTsumegoService.php?url=http://weiqi.tom.com/hubo/" + s[0] + "/game/" + f[0] + "sgf.htm";
+		element.href = "http://ino.xrea.jp/sgf/tom/TomTsumegoService.php?url=" + currentDir + s[0] + "/game/" + f[0] + "sgf.htm";
 	}else{
 	}
 	element.childNodes[0].style.cssText = "border:solid 1px;border-color:#00FF00;";
